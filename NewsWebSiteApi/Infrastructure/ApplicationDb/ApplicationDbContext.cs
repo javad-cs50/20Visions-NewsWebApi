@@ -5,6 +5,7 @@ using NewsWebSiteApi.Domain.Entities.Comment;
 using NewsWebSiteApi.Domain.Entities.Common;
 using NewsWebSiteApi.Domain.Entities.News;
 using NewsWebSiteApi.Domain.Entities.User;
+using System.Reflection;
 
 namespace NewsWebSiteApi.Infrastructure.ApplicationDb;
 
@@ -15,18 +16,20 @@ public  ApplicationDbContext(IHttpContextAccessor contextAccessor)
     {
         _contextAccessor = contextAccessor;
     }
-    public Dbset<User> Users => Set<User>();
-    public Dbset<Article> Articles => Set<Article>();
-    public Dbset<Comment> Comments => Set<Comment>();
-    public Dbset<Category> Categories => Set<Category>();
+    public DbSet<User> Users => Set<User>();
+    public DbSet<Article> Articles => Set<Article>();
+    public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<Category> Categories => Set<Category>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
+
     public DbSet<TEntity> SetDbSet<TEntity>() where TEntity : BaseEntity=>Set<TEntity>();
-    protected override void OnConfiguration(DbContextOptionBuilder optionBuilder) {
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder) {
         base.OnConfiguring(optionBuilder);
     }
 
