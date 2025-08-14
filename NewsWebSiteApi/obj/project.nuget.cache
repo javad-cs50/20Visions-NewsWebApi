@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "JfSbGoRegI8=",
+  "success": true,
+  "projectFilePath": "D:\\Afarinesh\\StartingWebApi\\NewsWebSite\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Green\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Green\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
+    "C:\\Users\\Green\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
+    "C:\\Users\\Green\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
+    "C:\\Users\\Green\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
+    "C:\\Users\\Green\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.6.2\\swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "D:\\Afarinesh\\StartingWebApi\\NewsWebSite\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Afarinesh\\StartingWebApi\\NewsWebSite\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
+      "targetGraphs": []
+    }
+  ]
+}
