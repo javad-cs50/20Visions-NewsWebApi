@@ -15,19 +15,19 @@ public class UserRepository: IUserRepository
     {
         _context = context;
     }
-    public async Task<User?> GetByIdAsync(int id)
+    public async Task<User?> GetById(int id)
     {
         var user = await _context.Users.FindAsync(id);
         return user;
     }
 
-    public async Task<IEnumerable<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAll()
     {
         var users = await _context.Users.ToListAsync();
         return users;
     }
 
-    public async Task<bool> AddAsync(User user)
+    public async Task<bool> Create(User user)
     {
         await _context.Users.AddAsync(user);
         var changes = await _context.SaveChangesAsync();
@@ -37,7 +37,7 @@ public class UserRepository: IUserRepository
             return false;
     }
 
-    public async Task<bool> UpdateAsync(User user)
+    public async Task<bool> Update(User user)
     {
         _context.Users.Update(user);
         var changes = await _context.SaveChangesAsync();
@@ -47,7 +47,7 @@ public class UserRepository: IUserRepository
             return false;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> Delete(int id)
     {
         var user = await _context.Users.FindAsync(id);
         if (user is not null) { 
