@@ -17,9 +17,9 @@ public class CommentRepository: ICommentRepository
     {
         _context = context;
     }
-    public async Task<IEnumerable<Comment>> GetAll()
+    public async Task<IEnumerable<Comment>> GetAll(int articleId)
     {
-        var comments = await _context.Comments.Where(c=>c.AppAction==AppAction.Active).ToListAsync();
+        var comments = await _context.Comments.Where(c=>c.NewsId==articleId && c.AppAction == AppAction.Active).ToListAsync();
         return comments;
     }
     public async Task<Comment?> GetById(int id)

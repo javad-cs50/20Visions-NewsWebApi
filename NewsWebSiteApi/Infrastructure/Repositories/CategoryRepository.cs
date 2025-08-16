@@ -42,7 +42,7 @@ public class CategoryRepository:ICategoryRepository
         if (category == null) return false;
         
          _context.Categories.Update(category);
-        var changes = _context.SaveChanges();
+        var changes =await _context.SaveChangesAsync();
         
         if (changes>=1) 
             return true;
