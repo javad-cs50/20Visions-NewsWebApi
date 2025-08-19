@@ -12,7 +12,7 @@ namespace NewsWebSiteApi.Infrastructure.ApplicationDb;
 public class ApplicationDbContext:DbContext,IApplicationDbContext
 {
     private readonly IHttpContextAccessor _contextAccessor;
-public  ApplicationDbContext(IHttpContextAccessor contextAccessor)
+public  ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IHttpContextAccessor contextAccessor):base(options)
     {
         _contextAccessor = contextAccessor;
     }

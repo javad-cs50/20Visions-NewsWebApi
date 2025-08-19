@@ -29,6 +29,7 @@ public class UsersController : ControllerBase
 
         var userDtos = users.Select(u => new ShowUserDto
         {
+            Id=u.Id,
             FirstName = u.FirstName,
             LastName = u.LastName,
             PhoneNumber = u.PhoneNumber
@@ -44,6 +45,7 @@ public class UsersController : ControllerBase
             return NotFound();
         var userDto = new ShowUserDto 
         { 
+            Id=user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
             PhoneNumber = user.PhoneNumber
