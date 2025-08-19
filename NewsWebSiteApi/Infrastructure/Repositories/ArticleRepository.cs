@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewsWebSiteApi.Application.Interfaces;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
-using NewsWebSiteApi.Domain.Entities.News;
+using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Enum;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
-using System.Threading.Channels;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace NewsWebSiteApi.Infrastructure.Repositories;
 
@@ -30,12 +27,30 @@ public class ArticleRepository : IArticleRepository
         return matcharticle;
         
     }
-    private static string[] SplitStringToList(string text) {
-        var keywordsList = text.Split(',');
+    private static List<string> SplitStringToList(string text) {
+        var keywordsList = text.Split(',').ToList();
         return keywordsList;
     }
 
-    
+    public async Task<List<Article>> GetByDiscription(string discription) {
+
+        var articles = await _context.Articles.Where(a => a.Discription.Contains(discription)).ToListAsync();
+        return articles;
+    }
+    public async Task<List<Article>> GetByTitle(string title)
+    {
+        var articles = await _context.Articles.Where(a => a.Discription.Contains(title)).ToListAsync();
+        return articles;
+    }
+    public async Task<List<Article?>?> GlobalSearch(string text) {
+
+        var byTitle = await GetByTitle(text);
+        var byDiscription = await GetByDiscription(text);
+        var byKeyword = await GetByKeyWord(text);
+        var articles = byTitle.Concat(byDiscription).Concat(byKeyword).DistinctBy(a=>a.Id).ToList();
+        return articles;
+
+    }
 
     public async Task<IEnumerable<Article>> GetAll()
     {
@@ -93,3 +108,6 @@ public class ArticleRepository : IArticleRepository
 
 }
 
+//SELECT
+//* FROM Articles
+//WHERE Discription like "%testDiscription%"

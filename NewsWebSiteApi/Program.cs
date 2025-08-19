@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 
-//it's register ApplicationDbContext as AddScoped and then attach the dBContext to db
+//it's register ApplicationDbContext as AddScoped and then attach the dBContext to DB
 builder.Services.AddDbContext<IApplicationDbContext,ApplicationDbContext>
     (option =>option.UseSqlServer(connectionString:builder.Configuration.GetConnectionString("Default")));
 

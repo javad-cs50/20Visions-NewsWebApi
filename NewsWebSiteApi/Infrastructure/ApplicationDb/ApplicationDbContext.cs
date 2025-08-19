@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsWebSiteApi.Application.Interfaces;
+using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Entities.Category;
 using NewsWebSiteApi.Domain.Entities.Comment;
 using NewsWebSiteApi.Domain.Entities.Common;
-using NewsWebSiteApi.Domain.Entities.News;
 using NewsWebSiteApi.Domain.Entities.User;
 using System.Reflection;
 

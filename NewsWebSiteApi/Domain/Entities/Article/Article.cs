@@ -1,6 +1,6 @@
 ﻿using NewsWebSiteApi.Domain.Entities.Common;
 
-namespace NewsWebSiteApi.Domain.Entities.News;
+namespace NewsWebSiteApi.Domain.Entities.Article;
 
 public class Article:BaseEntity
 {
@@ -12,5 +12,9 @@ public class Article:BaseEntity
     public string Discription { get; set; }
     //IsFeatured property is used to divide important news from the other news
     public bool IsFeatured { get; set; }
-    public string[]? KeyWord { get; set; }
+    public IList<string>? KeyWord { get; set; }
+    public User.User User { get; set; }
+    public Category.Category Category { get; set; }
+    public IList<Comment.Comment>? Comments { get; set; }
+
 }

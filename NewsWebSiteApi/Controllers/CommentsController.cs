@@ -63,7 +63,7 @@ namespace NewsWebSiteApi.Controllers
         {
             var comment = new Comment
             {
-                NewsId = req.NewsId,
+                ArticleId = req.NewsId,
                 FirstName = req.FirstName,
                 LastName = req.LastName,
                 PhoneNumber = req.PhoneNumber,

@@ -1,5 +1,25 @@
 [
   {
+    "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
+    "Method": "GetAllArticles",
+    "RelativePath": "api/Articles/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Domain.Entities.Article.Article, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "NewsWebSiteApi.Controllers.CategoriesController",
     "Method": "CreateCategory",
     "RelativePath": "api/Categories",
