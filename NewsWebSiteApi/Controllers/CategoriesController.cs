@@ -21,7 +21,7 @@ public class CategoriesController : ControllerBase
         _logger = logger;
         _configuration = configuration;
     }
-    [HttpGet("GetAll")]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowCategoryDto>>> GetAllCategory() {
        var categories = await _categoryRepository.GetAll();
         var categoryDtos= categories.Select(c => new ShowCategoryDto
@@ -70,6 +70,7 @@ public class CategoriesController : ControllerBase
             return NotFound();
         else
         {
+
             category.Title = categoryDto.Title;
             category.Symbol = categoryDto.Symbol;
             category.ModifiedDate = DateTime.Now;

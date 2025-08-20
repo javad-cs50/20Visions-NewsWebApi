@@ -3,6 +3,7 @@ using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Enum;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
+using System.Linq;
 
 namespace NewsWebSiteApi.Infrastructure.Repositories;
 
@@ -23,8 +24,13 @@ public class ArticleRepository : IArticleRepository
     public async Task<IEnumerable<Article?>> GetByKeyWord(string keyWords)
     {
         var keyWordList = SplitStringToList(keyWords);
-        var matcharticle = await _context.Articles.Where(a => a.KeyWord.Any(kw => keyWordList.Contains(kw))).ToListAsync();
-        return matcharticle;
+        var matchArticle = await _context.Articles
+            .Where(a => keyWordList
+            .Any(kw => a.KeyWord
+            .Contains(kw)))
+            .ToListAsync();
+
+        return matchArticle;
         
     }
     private static List<string> SplitStringToList(string text) {

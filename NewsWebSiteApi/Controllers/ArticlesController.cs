@@ -2,6 +2,7 @@
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.Article;
 using NewsWebSiteApi.Domain.Entities.Article;
+using NewsWebSiteApi.Domain.Entities.Comment;
 
 namespace NewsWebSiteApi.Controllers
 {
@@ -18,7 +19,7 @@ namespace NewsWebSiteApi.Controllers
             _logger = logger;
             _configuration = configuration;
         }
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetAllArticles()
         {
             var articles = await _articleRepository.GetAll();
@@ -32,6 +33,67 @@ namespace NewsWebSiteApi.Controllers
 
             });
             return Ok(categoryDtos);
+        }
+        [HttpPost]
+        public async Task<ActionResult<bool>> CreateArticle([FromBody] CreateArticleDto req )
+        {
+            var article = new Article
+            {
+                Title = req.Title,
+                Cover = req.Cover,
+                Discription = req.Discription,
+                CategoryId = req.CategoryId,
+                AuthorId = req.AuthorId,
+                CreatedDate = DateTime.Now
+            };
+            var result =_articleRepository.Create(article);
+            if (result == null)
+                return BadRequest(result);
+            return Ok(result);
+
+
+
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<bool>> UpdateArticle(int id, [FromBody] CreateArticleDto articleDto )
+        {
+            var article =await _articleRepository.GetById(id);
+            if (article is not null)
+                return NotFound();
+
+            else
+            {
+                article.ModifiedDate = DateTime.Now;
+                article.IsFeatured = articleDto.IsFeatured;
+                article.Title = articleDto.Title;
+                article.Discription = articleDto.Discription;
+                article.Cover = articleDto.Cover;
+                article.CategoryId = articleDto.CategoryId;
+                article.KeyWord = articleDto.KeyWord;
+                
+                
+            }     
+            
+
+            var result = await _articleRepository.Update(article);
+            if (result == false)
+                return BadRequest(result);
+            return Ok(result);
+
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteArticle(int id) 
+        {
+            var article =await _articleRepository.GetById(id);
+            if (article == null) return NotFound();
+
+            var result = await _articleRepository.Delete(id);
+
+            if (result == false)
+                BadRequest(result);
+
+            return Ok(result);
         }
     }
 }

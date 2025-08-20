@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
         _logger = logger;
         _configuration = configuration;
     }
-    [HttpGet("users")]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowUserDto>>> GetAllUsers()
     {
         var users =await _userRepository.GetAll();

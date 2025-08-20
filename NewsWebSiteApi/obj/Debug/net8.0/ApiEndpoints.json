@@ -2,7 +2,7 @@
   {
     "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
     "Method": "GetAllArticles",
-    "RelativePath": "api/Articles/GetAll",
+    "RelativePath": "api/Articles",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,6 +10,109 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Domain.Entities.Article.Article, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
+    "Method": "CreateArticle",
+    "RelativePath": "api/Articles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "NewsWebSiteApi.Application.Models.Article.CreateArticleDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
+    "Method": "UpdateArticle",
+    "RelativePath": "api/Articles/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "articleDto",
+        "Type": "NewsWebSiteApi.Application.Models.Article.CreateArticleDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
+    "Method": "DeleteArticle",
+    "RelativePath": "api/Articles/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.CategoriesController",
+    "Method": "GetAllCategory",
+    "RelativePath": "api/Categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Category.ShowCategoryDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -129,26 +232,6 @@
     ]
   },
   {
-    "ContainingType": "NewsWebSiteApi.Controllers.CategoriesController",
-    "Method": "GetAllCategory",
-    "RelativePath": "api/Categories/GetAll",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Category.ShowCategoryDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
     "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
     "Method": "CreateComment",
     "RelativePath": "api/Comments",
@@ -165,6 +248,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
+    "Method": "GetAllCommentsByArticleId",
+    "RelativePath": "api/Comments/{articleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "articleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Comment.ShowCommentDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -202,7 +311,7 @@
   },
   {
     "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
-    "Method": "Update",
+    "Method": "UpdateCategory",
     "RelativePath": "api/Comments/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -233,7 +342,7 @@
   },
   {
     "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
-    "Method": "Delete",
+    "Method": "DeleteComment",
     "RelativePath": "api/Comments/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -248,32 +357,6 @@
     "ReturnTypes": [
       {
         "Type": "System.Boolean",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
-    "Method": "GetAllCommentsByArticleId",
-    "RelativePath": "api/Comments/GetAll/{articleId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "articleId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Comment.ShowCommentDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

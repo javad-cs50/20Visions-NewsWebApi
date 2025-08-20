@@ -23,7 +23,7 @@ namespace NewsWebSiteApi.Controllers
         }
 
         
-        [HttpGet("GetAll/{articleId}")]
+        [HttpGet("{articleId}")]
         public async Task<ActionResult<IEnumerable<ShowCommentDto>>> GetAllCommentsByArticleId(int articleId)
         {
             var comments = await _commentRepository.GetAll(articleId);
@@ -81,7 +81,7 @@ namespace NewsWebSiteApi.Controllers
 
         
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> Update(int id, [FromBody] CreateCommentDto req)
+        public async Task<ActionResult<bool>> UpdateCategory(int id, [FromBody] CreateCommentDto req)
         {
             var comment = await _commentRepository.GetById(id);
             if (comment == null)
@@ -102,7 +102,7 @@ namespace NewsWebSiteApi.Controllers
 
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        public async Task<ActionResult<bool>> DeleteComment(int id)
         {
             var comment = await _commentRepository.GetById(id);
             if (comment == null)

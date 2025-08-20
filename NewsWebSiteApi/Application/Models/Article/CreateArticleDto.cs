@@ -9,6 +9,7 @@
         public string Discription { get; set; }
         //IsFeatured property is used to divide important news from the other news
         public bool IsFeatured { get; set; }
-        public string[]? KeyWord { get; set; }
+        public string KeyWord { get; set; }
+
     }
 }
