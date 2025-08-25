@@ -3,7 +3,6 @@ using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Enum;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
-using System.Linq;
 
 namespace NewsWebSiteApi.Infrastructure.Repositories;
 
@@ -19,7 +18,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task<Article?> GetById(int id)
     {
-        return await _context.Articles.FindAsync(id);
+        return await _context.Articles.FirstOrDefaultAsync(a=>a.Id==id);
     }
     public async Task<IEnumerable<Article?>> GetByKeyWord(string keyWords)
     {
@@ -27,11 +26,10 @@ public class ArticleRepository : IArticleRepository
         var matchArticle = await _context.Articles
             .Where(a => keyWordList
             .Any(kw => a.KeyWord
-            .Contains(kw)))
+            .Contains(kw))).Where(a=>a.AppAction==AppAction.Active)
             .ToListAsync();
 
-        return matchArticle;
-        
+        return matchArticle;        
     }
     private static List<string> SplitStringToList(string text) {
         var keywordsList = text.Split(',').ToList();
@@ -45,7 +43,7 @@ public class ArticleRepository : IArticleRepository
     }
     public async Task<List<Article>> GetByTitle(string title)
     {
-        var articles = await _context.Articles.Where(a => a.Discription.Contains(title)).ToListAsync();
+        var articles = await _context.Articles.Where(a => a.Title.Contains(title)).ToListAsync();
         return articles;
     }
     public async Task<List<Article?>?> GlobalSearch(string text) {
@@ -60,7 +58,7 @@ public class ArticleRepository : IArticleRepository
 
     public async Task<IEnumerable<Article>> GetAll()
     {
-        var articles = await _context.Articles.ToListAsync();
+        var articles = await _context.Articles.Where(a=>a.AppAction==AppAction.Active).ToListAsync();
         return articles;
     }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.Article;
 using NewsWebSiteApi.Domain.Entities.Article;
@@ -23,7 +24,7 @@ namespace NewsWebSiteApi.Controllers
         public async Task<ActionResult<IEnumerable<Article>>> GetAllArticles()
         {
             var articles = await _articleRepository.GetAll();
-            if (articles == null)
+            if (articles==null || !articles.Any())
                 return NotFound();
             var categoryDtos= articles.Select(a => new ShowArticleDto
             {

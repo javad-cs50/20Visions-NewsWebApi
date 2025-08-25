@@ -27,7 +27,7 @@ public class CommentConfiguraion : IEntityTypeConfiguration<Comment>
         builder.HasOne(c=>c.Article)
             .WithMany(a=>a.Comments)
             .HasForeignKey(c=>c.ArticleId);
-
+        
         builder.ToTable("Comments");
 
 

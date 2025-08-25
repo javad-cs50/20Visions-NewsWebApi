@@ -32,16 +32,21 @@ public class ArticleConfiguraion : IEntityTypeConfiguration<Article>
         builder.HasOne(a => a.User)
                .WithMany(u => u.Articles)
                .HasForeignKey(a => a.AuthorId);
+        builder.Navigation(a => a.User).AutoInclude();
 
         //article and category relationship
         builder.HasOne(a=>a.Category)
             .WithMany(c=>c.articles)
             .HasForeignKey(a => a.CategoryId);
+        builder.Navigation(a => a.Category).AutoInclude();
+
 
         //article and comment relationship
         builder.HasMany(a => a.Comments)
             .WithOne(c => c.Article)
             .HasForeignKey(a => a.ArticleId);
+        builder.Navigation(a => a.Comments).AutoInclude();
+
 
         builder.ToTable("Articles");
 
