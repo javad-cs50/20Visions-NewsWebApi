@@ -10,7 +10,7 @@ public class ArticleRepository : IArticleRepository
 {
     
     private readonly ApplicationDbContext _context;
-
+    
     public ArticleRepository(ApplicationDbContext context)
     {
         _context = context;
@@ -36,9 +36,9 @@ public class ArticleRepository : IArticleRepository
         return keywordsList;
     }
 
-    public async Task<List<Article>> GetByDiscription(string discription) {
+    public async Task<List<Article>> GetByDescription(string description) {
 
-        var articles = await _context.Articles.Where(a => a.Discription.Contains(discription)).ToListAsync();
+        var articles = await _context.Articles.Where(a => a.Discription.Contains(description)).ToListAsync();
         return articles;
     }
     public async Task<List<Article>> GetByTitle(string title)
@@ -49,9 +49,9 @@ public class ArticleRepository : IArticleRepository
     public async Task<List<Article?>?> GlobalSearch(string text) {
 
         var byTitle = await GetByTitle(text);
-        var byDiscription = await GetByDiscription(text);
+        var byDescription = await GetByDescription(text);
         var byKeyword = await GetByKeyWord(text);
-        var articles = byTitle.Concat(byDiscription).Concat(byKeyword).DistinctBy(a=>a.Id).ToList();
+        var articles = byTitle.Concat(byDescription).Concat(byKeyword).DistinctBy(a=>a.Id).ToList();
         return articles;
 
     }
@@ -112,6 +112,3 @@ public class ArticleRepository : IArticleRepository
 
 }
 
-//SELECT
-//* FROM Articles
-//WHERE Discription like "%testDiscription%"

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.Article;
@@ -20,6 +23,8 @@ namespace NewsWebSiteApi.Controllers
             _logger = logger;
             _configuration = configuration;
         }
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Article>>> GetAllArticles()
         {
@@ -35,6 +40,34 @@ namespace NewsWebSiteApi.Controllers
             });
             return Ok(categoryDtos);
         }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Article>>> GetBySearch([FromQuery] string keyWord, [FromQuery] string title, [FromQuery]string description ) {
+            
+            var articles=new List<Article>();
+            if(keyWord is not null)
+            {
+                articles.AddRange(await _articleRepository.GetByKeyWord(keyWord));
+
+            }
+            if (title is not null)
+            {
+                articles.AddRange(await _articleRepository.GetByTitle(title));
+
+            }
+            if (description is not null)
+            {
+                articles.AddRange(await _articleRepository.GetByDescription(description));
+
+            }
+
+            if (articles ==null ||!articles.Any())
+                return NotFound();
+            
+            return  Ok( articles.Distinct().ToList() );
+
+        }
+
         [HttpPost]
         public async Task<ActionResult<bool>> CreateArticle([FromBody] CreateArticleDto req )
         {
@@ -45,10 +78,11 @@ namespace NewsWebSiteApi.Controllers
                 Discription = req.Discription,
                 CategoryId = req.CategoryId,
                 AuthorId = req.AuthorId,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                KeyWord=req.KeyWord
             };
-            var result =_articleRepository.Create(article);
-            if (result == null)
+            var result =await _articleRepository.Create(article);
+            if (result==false)
                 return BadRequest(result);
             return Ok(result);
 

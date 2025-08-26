@@ -16,4 +16,5 @@ public interface IApplicationDbContext
 
     public DbSet<TEntity> SetDbSet<TEntity>() where TEntity : BaseEntity;
 }
+
    
