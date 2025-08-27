@@ -1,8 +1,8 @@
-﻿namespace NewsWebSiteApi.Application.Models.Category
+﻿namespace NewsWebSiteApi.Application.Models.Category;
+
+public class ShowCategoryDto
 {
-    public class ShowCategoryDto
-    {
-        public string Title { get; set; }
-        public string Symbol { get; set; }
-    }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Symbol { get; set; }
 }

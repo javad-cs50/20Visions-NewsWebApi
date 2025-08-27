@@ -26,6 +26,7 @@ public class CategoriesController : ControllerBase
        var categories = await _categoryRepository.GetAll();
         var categoryDtos= categories.Select(c => new ShowCategoryDto
         {
+            Id = c.Id,
             Symbol = c.Symbol,
             Title = c.Title
         });
@@ -38,6 +39,7 @@ public class CategoriesController : ControllerBase
         var category = await _categoryRepository.GetById(categoryId);
         var categoryDto = new ShowCategoryDto
         {
+            Id = categoryId,
             Symbol= category.Symbol ,
             Title= category.Title 
         };

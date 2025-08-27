@@ -32,7 +32,7 @@ public class ArticleRepository : IArticleRepository
         return matchArticle;        
     }
     private static List<string> SplitStringToList(string text) {
-        var keywordsList = text.Split(',').ToList();
+        var keywordsList = text.Split(',',StringSplitOptions.RemoveEmptyEntries).ToList();
         return keywordsList;
     }
 

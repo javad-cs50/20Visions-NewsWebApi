@@ -30,6 +30,7 @@ namespace NewsWebSiteApi.Controllers
             if (comments == null) return NotFound();
             var commentDtos = comments.Select(c => new ShowCommentDto
             {
+                Id = c.Id,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Message = c.Message,
@@ -48,6 +49,7 @@ namespace NewsWebSiteApi.Controllers
 
             var commentDto = new ShowCommentDto
             {
+                Id = comment.Id,
                 FirstName = comment.FirstName,
                 LastName = comment.LastName,
                 Message = comment.Message,

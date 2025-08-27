@@ -31,8 +31,7 @@ public class UsersController : ControllerBase
         {
             Id=u.Id,
             FirstName = u.FirstName,
-            LastName = u.LastName,
-            PhoneNumber = u.PhoneNumber
+            LastName = u.LastName
 
         });
         return Ok(userDtos);
@@ -48,7 +47,7 @@ public class UsersController : ControllerBase
             Id=user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            PhoneNumber = user.PhoneNumber
+
         };
         return Ok(userDto);
     }

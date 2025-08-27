@@ -26,23 +26,29 @@ namespace NewsWebSiteApi.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Article>>> GetAllArticles()
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetAllArticles()
         {
             var articles = await _articleRepository.GetAll();
             if (articles==null || !articles.Any())
                 return NotFound();
             var categoryDtos= articles.Select(a => new ShowArticleDto
             {
+                Id = a.Id,
                 Cover=a.Cover, 
                 Discription=a.Discription,
-                Title=a.Title,AuthorId=a.AuthorId,CreatedDate=a.CreatedDate
+                Title=a.Title,
+                AuthorId=a.AuthorId,
+                CategoryId=a.CategoryId,
+                CreatedDate=a.CreatedDate,
+                IsFeatured =a.IsFeatured
+
 
             });
             return Ok(categoryDtos);
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Article>>> GetBySearch([FromQuery] string keyWord, [FromQuery] string title, [FromQuery]string description ) {
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetBySearch([FromQuery] string keyWord, [FromQuery] string title, [FromQuery]string description ) {
             
             var articles=new List<Article>();
             if(keyWord is not null)
@@ -61,10 +67,49 @@ namespace NewsWebSiteApi.Controllers
 
             }
 
-            if (articles ==null ||!articles.Any())
+            if (articles == null || !articles.Any())
                 return NotFound();
-            
-            return  Ok( articles.Distinct().ToList() );
+            else
+            {
+                var articleDtos = articles.Distinct().Select(a => new ShowArticleDto
+                {
+                    Id = a.Id,
+                    Cover = a.Cover,
+                    Discription = a.Discription,
+                    Title = a.Title,
+                    AuthorId = a.AuthorId,
+                    CategoryId = a.CategoryId,
+                    CreatedDate = a.CreatedDate,
+                    IsFeatured = a.IsFeatured
+                });
+                
+
+                return Ok(articleDtos);
+            }
+        }
+
+        [HttpGet("globalSearch")]
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetByGlobalSearch(string globalSearch)
+        {
+            var articles = await _articleRepository.GlobalSearch(globalSearch);
+            if(articles==null || !articles.Any())
+                return NotFound();
+            else
+            {
+                var articleDtos = articles.Distinct().Select(a => new ShowArticleDto
+                {
+                    Id = a.Id,
+                    Cover = a.Cover,
+                    Discription = a.Discription,
+                    Title = a.Title,
+                    AuthorId = a.AuthorId,
+                    CategoryId = a.CategoryId,
+                    CreatedDate = a.CreatedDate,
+                    IsFeatured = a.IsFeatured
+                });
+
+                return Ok(articles);
+            }
 
         }
 

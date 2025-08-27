@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Code\\Desktop\\New folder (4)\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj": {}
+    "C:\\Users\\Green\\Desktop\\v2\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Code\\Desktop\\New folder (4)\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj": {
+    "C:\\Users\\Green\\Desktop\\v2\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Code\\Desktop\\New folder (4)\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
+        "projectUniqueName": "C:\\Users\\Green\\Desktop\\v2\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
         "projectName": "NewsWebSiteApi",
-        "projectPath": "C:\\Users\\Code\\Desktop\\New folder (4)\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
-        "packagesPath": "C:\\Users\\Code\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Code\\Desktop\\New folder (4)\\20Visions-NewsWebApi\\NewsWebSiteApi\\obj\\",
+        "projectPath": "C:\\Users\\Green\\Desktop\\v2\\20Visions-NewsWebApi\\NewsWebSiteApi\\NewsWebSiteApi.csproj",
+        "packagesPath": "C:\\Users\\Green\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Green\\Desktop\\v2\\20Visions-NewsWebApi\\NewsWebSiteApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Code\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Green\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
