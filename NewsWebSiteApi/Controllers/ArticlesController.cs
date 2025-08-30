@@ -29,7 +29,7 @@ namespace NewsWebSiteApi.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetAllArticles()
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>?>> GetAllArticles()
         {
             var articles = await _articleRepository.GetAll();
             if (articles==null || !articles.Any())
@@ -78,7 +78,7 @@ namespace NewsWebSiteApi.Controllers
             if(keyWord is not null)
             {
                 articles.AddRange(await _articleRepository.GetByKeyWord(keyWord));
-
+                
             }
             if (title is not null)
             {
@@ -104,8 +104,29 @@ namespace NewsWebSiteApi.Controllers
                     AuthorId = a.AuthorId,
                     CategoryId = a.CategoryId,
                     CreatedDate = a.CreatedDate,
-                    IsFeatured = a.IsFeatured
-                    
+                    IsFeatured = a.IsFeatured,
+                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
+                    {
+                        Id = c.Id,
+                        FirstName = c.FirstName,
+                        LastName = c.LastName,
+                        Message = c.Message,
+
+                        CreatedDate = c.CreatedDate
+                    }).ToList()),
+                    CategoryDto = new ShowCategoryDto
+                    {
+                        Id = a.Category.Id,
+                        Symbol = a.Category.Symbol,
+                        Title = a.Category.Title
+                    },
+                    UserDto = new ShowUserDto
+                    {
+                        FirstName = a.User.FirstName,
+                        LastName = a.User.LastName,
+                        Id = a.User.Id,
+                    }
+
                 });
                 
 
@@ -130,10 +151,31 @@ namespace NewsWebSiteApi.Controllers
                     AuthorId = a.AuthorId,
                     CategoryId = a.CategoryId,
                     CreatedDate = a.CreatedDate,
-                    IsFeatured = a.IsFeatured
+                    IsFeatured = a.IsFeatured,
+                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
+                    {
+                        Id = c.Id,
+                        FirstName = c.FirstName,
+                        LastName = c.LastName,
+                        Message = c.Message,
+
+                        CreatedDate = c.CreatedDate
+                    }).ToList()),
+                    CategoryDto = new ShowCategoryDto
+                    {
+                        Id = a.Category.Id,
+                        Symbol = a.Category.Symbol,
+                        Title = a.Category.Title
+                    },
+                    UserDto = new ShowUserDto
+                    {
+                        FirstName = a.User.FirstName,
+                        LastName = a.User.LastName,
+                        Id = a.User.Id,
+                    }
                 });
 
-                return Ok(articles);
+                return Ok(articleDtos);
             }
 
         }
