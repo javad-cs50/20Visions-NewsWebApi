@@ -1081,9 +1081,6 @@
             "type": "string",
             "nullable": true
           },
-          "isFeatured": {
-            "type": "boolean"
-          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -1095,6 +1092,22 @@
           "categoryId": {
             "type": "integer",
             "format": "int32"
+          },
+          "isFeatured": {
+            "type": "boolean"
+          },
+          "userDto": {
+            "$ref": "#/components/schemas/ShowUserDto"
+          },
+          "categoryDto": {
+            "$ref": "#/components/schemas/ShowCategoryDto"
+          },
+          "commentsDto": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShowCommentDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

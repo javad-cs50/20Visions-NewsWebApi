@@ -36,7 +36,7 @@ public class ArticleConfiguraion : IEntityTypeConfiguration<Article>
 
         //article and category relationship
         builder.HasOne(a=>a.Category)
-            .WithMany(c=>c.articles)
+            .WithMany(c=>c.Articles)
             .HasForeignKey(a => a.CategoryId);
         builder.Navigation(a => a.Category).AutoInclude();
 

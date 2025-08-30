@@ -18,7 +18,7 @@ public class CategoryConfiguraion : IEntityTypeConfiguration<Category>
                .HasMaxLength(10).IsUnicode(true);
 
 
-        builder.HasMany(c => c.articles)
+        builder.HasMany(c => c.Articles)
             .WithOne(a => a.Category)
             .HasForeignKey(a=>a.CategoryId);
 

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.Article;
+using NewsWebSiteApi.Application.Models.Category;
+using NewsWebSiteApi.Application.Models.Comment;
+using NewsWebSiteApi.Application.Models.User;
 using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Entities.Comment;
 
@@ -31,20 +34,41 @@ namespace NewsWebSiteApi.Controllers
             var articles = await _articleRepository.GetAll();
             if (articles==null || !articles.Any())
                 return NotFound();
-            var categoryDtos= articles.Select(a => new ShowArticleDto
+            
+            var articleDtos = articles.Select( a => new ShowArticleDto 
             {
                 Id = a.Id,
-                Cover=a.Cover, 
-                Discription=a.Discription,
-                Title=a.Title,
-                AuthorId=a.AuthorId,
-                CategoryId=a.CategoryId,
-                CreatedDate=a.CreatedDate,
-                IsFeatured =a.IsFeatured
+                Cover = a.Cover,
+                Discription = a.Discription,
+                Title = a.Title,
+                AuthorId = a.AuthorId,
+                CategoryId = a.CategoryId,
+                CreatedDate = a.CreatedDate,
+                IsFeatured = a.IsFeatured,
+                CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
+                { 
+                    Id=c.Id,
+                    FirstName=c.FirstName,
+                    LastName=c.LastName,
+                    Message = c.Message,
 
+                    CreatedDate = c.CreatedDate
+                }).ToList()),
+                CategoryDto = new ShowCategoryDto
+                { 
+                    Id=a.Category.Id,
+                    Symbol=a.Category.Symbol,
+                    Title=a.Category.Title
+                },
+                UserDto =new ShowUserDto
+                {
+                    FirstName =a.User.FirstName,
+                    LastName =a.User.LastName,
+                    Id=a.User.Id,
+                }
 
             });
-            return Ok(categoryDtos);
+            return Ok(articleDtos);
         }
 
         [HttpGet("search")]
@@ -81,6 +105,7 @@ namespace NewsWebSiteApi.Controllers
                     CategoryId = a.CategoryId,
                     CreatedDate = a.CreatedDate,
                     IsFeatured = a.IsFeatured
+                    
                 });
                 
 

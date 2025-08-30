@@ -25,7 +25,7 @@ public class UserConfiguraion :IEntityTypeConfiguration<User>
 
 
         builder.HasMany(u => u.Articles)
-            .WithOne(a => a.User)
+            .WithOne( a => a.User)
             .HasForeignKey(a=>a.AuthorId);
         
         
