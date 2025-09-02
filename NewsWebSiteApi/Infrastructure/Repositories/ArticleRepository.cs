@@ -18,7 +18,9 @@ public class ArticleRepository : IArticleRepository
 
     public async Task<Article?> GetById(int id)
     {
-        return await _context.Articles.FirstOrDefaultAsync(a=>a.Id==id);
+         var article =await _context.Articles
+            .FirstOrDefaultAsync(a=>a.Id==id);
+        return article;
     }
     public async Task<IEnumerable<Article?>> GetByKeyWord(string keyWords)
     {
@@ -27,6 +29,7 @@ public class ArticleRepository : IArticleRepository
             .Where(a => keyWordList
             .Any(kw => a.KeyWord
             .Contains(kw))).Where(a=>a.AppAction==AppAction.Active)
+            .AsNoTracking()
             .ToListAsync();
 
         return matchArticle;        
@@ -38,12 +41,18 @@ public class ArticleRepository : IArticleRepository
 
     public async Task<List<Article>> GetByDescription(string description) {
 
-        var articles = await _context.Articles.Where(a => a.Discription.Contains(description)).ToListAsync();
+        var articles = await _context.Articles
+            .Where(a => a.Discription.Contains(description))
+            .AsNoTracking()
+            .ToListAsync();
         return articles;
     }
     public async Task<List<Article>> GetByTitle(string title)
     {
-        var articles = await _context.Articles.Where(a => a.Title.Contains(title)).ToListAsync();
+        var articles = await _context.Articles
+            .Where(a => a.Title.Contains(title))
+            .AsNoTracking()
+            .ToListAsync();
         return articles;
     }
     public async Task<List<Article?>?> GlobalSearch(string text) {
@@ -51,14 +60,22 @@ public class ArticleRepository : IArticleRepository
         var byTitle = await GetByTitle(text);
         var byDescription = await GetByDescription(text);
         var byKeyword = await GetByKeyWord(text);
-        var articles = byTitle.Concat(byDescription).Concat(byKeyword).DistinctBy(a=>a.Id).ToList();
+        var articles = byTitle
+            .Concat(byDescription)
+            .Concat(byKeyword)
+            .DistinctBy(a=>a?.Id)
+            .Where(a=> a?.AppAction == AppAction.Active)
+            .ToList();
         return articles;
 
     }
 
     public async Task<IEnumerable<Article>> GetAll()
     {
-        var articles = await _context.Articles.Where(a=>a.AppAction==AppAction.Active).ToListAsync();
+        var articles = await _context.Articles
+            .Where(a=>a.AppAction==AppAction.Active)
+            .AsNoTracking()
+            .ToListAsync();
         return articles;
     }
 

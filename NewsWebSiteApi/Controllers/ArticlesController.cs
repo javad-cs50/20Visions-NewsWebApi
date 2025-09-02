@@ -179,6 +179,51 @@ namespace NewsWebSiteApi.Controllers
             }
 
         }
+        [HttpGet("Featured")]
+        public async Task<ActionResult<ShowArticleDto>> GetIsFeatured()
+        {
+            var featuredArticle = await _articleRepository.GetFeaturedArticles();
+            if (featuredArticle == null || !featuredArticle.Any())
+                return NotFound();
+            else
+            {
+                var featuredArticleDto = featuredArticle.Select(a => new ShowArticleDto
+                {
+                    Id = a.Id,
+                    Cover = a.Cover,
+                    Discription = a.Discription,
+                    Title = a.Title,
+                    AuthorId = a.AuthorId,
+                    CategoryId = a.CategoryId,
+                    CreatedDate = a.CreatedDate,
+                    IsFeatured = a.IsFeatured,
+                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
+                    {
+                        Id = c.Id,
+                        FirstName = c.FirstName,
+                        LastName = c.LastName,
+                        Message = c.Message,
+
+                        CreatedDate = c.CreatedDate
+                    }).ToList()),
+                    CategoryDto = new ShowCategoryDto
+                    {
+                        Id = a.Category.Id,
+                        Symbol = a.Category.Symbol,
+                        Title = a.Category.Title
+                    },
+                    UserDto = new ShowUserDto
+                    {
+                        FirstName = a.User.FirstName,
+                        LastName = a.User.LastName,
+                        Id = a.User.Id,
+                    }
+                });
+                
+            }
+                return Ok(featuredArticle);
+
+        }
 
         [HttpPost]
         public async Task<ActionResult<bool>> CreateArticle([FromBody] CreateArticleDto req )
@@ -230,7 +275,7 @@ namespace NewsWebSiteApi.Controllers
 
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteArticle(int id) 
+        public async Task<ActionResult<bool>> DeleteArticle([FromRoute]int id) 
         {
             var article =await _articleRepository.GetById(id);
             if (article == null) return NotFound();
@@ -242,5 +287,9 @@ namespace NewsWebSiteApi.Controllers
 
             return Ok(result);
         }
+        
+
+
     }
+
 }

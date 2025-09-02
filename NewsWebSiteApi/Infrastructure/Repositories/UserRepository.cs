@@ -23,7 +23,7 @@ public class UserRepository: IUserRepository
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        var users = await _context.Users.ToListAsync();
+        var users = await _context.Users.AsNoTracking().ToListAsync();
         return users;
     }
 

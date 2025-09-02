@@ -28,8 +28,6 @@ builder.Services.AddScoped<ICommentRepository,CommentRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

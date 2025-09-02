@@ -19,12 +19,17 @@ public class CommentRepository: ICommentRepository
     }
     public async Task<IEnumerable<Comment>> GetAll(int articleId)
     {
-        var comments = await _context.Comments.Where(c=>c.ArticleId==articleId && c.AppAction == AppAction.Active).ToListAsync();
+        var comments = await _context.Comments
+            .Where(c=>c.ArticleId==articleId && c.AppAction == AppAction.Active)
+            .AsNoTracking()
+            .ToListAsync();
         return comments;
     }
     public async Task<Comment?> GetById(int id)
     {
-        var comment = await _context.Comments.FirstOrDefaultAsync(c=>c.Id==id && c.AppAction == AppAction.Active);
+        var comment = await _context.Comments
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c=>c.Id==id && c.AppAction == AppAction.Active);
         return comment;
     }
     public async Task<bool> Create(Comment comment)

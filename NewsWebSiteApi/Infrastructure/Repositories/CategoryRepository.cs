@@ -22,7 +22,9 @@ public class CategoryRepository:ICategoryRepository
     }
     public async Task<IEnumerable<Category>> GetAll()
     {
-        var categories = await _context.Categories.ToListAsync();
+        var categories = await _context.Categories
+            .AsNoTracking()
+            .ToListAsync();
         return categories;
     }
     public async Task<bool> Create(Category category)

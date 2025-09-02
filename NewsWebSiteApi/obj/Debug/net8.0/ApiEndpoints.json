@@ -104,6 +104,26 @@
   },
   {
     "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
+    "Method": "GetIsFeatured",
+    "RelativePath": "api/Articles/Featured",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "NewsWebSiteApi.Application.Models.Article.ShowArticleDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.ArticlesController",
     "Method": "GetByGlobalSearch",
     "RelativePath": "api/Articles/globalSearch",
     "HttpMethod": "GET",

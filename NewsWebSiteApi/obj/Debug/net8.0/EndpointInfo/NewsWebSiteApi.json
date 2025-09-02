@@ -197,6 +197,35 @@
         }
       }
     },
+    "/api/Articles/Featured": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowArticleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowArticleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShowArticleDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Articles/{id}": {
       "put": {
         "tags": [
