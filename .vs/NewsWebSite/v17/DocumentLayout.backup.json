@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\infrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\infrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\infrastructure\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\infrastructure\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\infrastructure\\repositories\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\infrastructure\\repositories\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|c:\\users\\code\\desktop\\projects\\news_website\\backend\\newswebsiteapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A35B45-4194-45E7-A5AB-0C2415790D02}|NewsWebSiteApi\\NewsWebSiteApi.csproj|solutionrelative:newswebsiteapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "NewsWebSiteApi\\Infrastructure\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "NewsWebSiteApi\\Infrastructure\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAcwBMAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T07:33:36.86Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CommentRepository.cs",
               "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\CommentRepository.cs",
               "RelativeDocumentMoniker": "NewsWebSiteApi\\Infrastructure\\Repositories\\CommentRepository.cs",
               "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\CommentRepository.cs",
               "RelativeToolTip": "NewsWebSiteApi\\Infrastructure\\Repositories\\CommentRepository.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwB8AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAmwF0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T07:32:54.308Z",
+              "WhenOpened": "2025-09-02T08:48:57.776Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CategoryRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\CategoryRepository.cs",
-              "RelativeDocumentMoniker": "NewsWebSiteApi\\Infrastructure\\Repositories\\CategoryRepository.cs",
-              "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\CategoryRepository.cs",
-              "RelativeToolTip": "NewsWebSiteApi\\Infrastructure\\Repositories\\CategoryRepository.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAwwBoAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CommentsController.cs",
+              "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Controllers\\CommentsController.cs",
+              "RelativeDocumentMoniker": "NewsWebSiteApi\\Controllers\\CommentsController.cs",
+              "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Controllers\\CommentsController.cs",
+              "RelativeToolTip": "NewsWebSiteApi\\Controllers\\CommentsController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAowBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T07:26:49.783Z",
+              "WhenOpened": "2025-09-02T08:36:57.263Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ArticleRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\ArticleRepository.cs",
-              "RelativeDocumentMoniker": "NewsWebSiteApi\\Infrastructure\\Repositories\\ArticleRepository.cs",
-              "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Infrastructure\\Repositories\\ArticleRepository.cs",
-              "RelativeToolTip": "NewsWebSiteApi\\Infrastructure\\Repositories\\ArticleRepository.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAFYAAAAbAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Program.cs",
+              "RelativeDocumentMoniker": "NewsWebSiteApi\\Program.cs",
+              "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Program.cs",
+              "RelativeToolTip": "NewsWebSiteApi\\Program.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAuwCwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T07:02:49.752Z",
+              "WhenOpened": "2025-09-02T07:52:19.15Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ArticlesController.cs",
               "DocumentMoniker": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Controllers\\ArticlesController.cs",
               "RelativeDocumentMoniker": "NewsWebSiteApi\\Controllers\\ArticlesController.cs",
               "ToolTip": "C:\\Users\\Code\\Desktop\\Projects\\News_webSite\\BackEnd\\NewsWebSiteApi\\Controllers\\ArticlesController.cs",
               "RelativeToolTip": "NewsWebSiteApi\\Controllers\\ArticlesController.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAYwOYAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAIBAAAAAAAAAAArwBcBAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T10:21:11.843Z",
+              "WhenOpened": "2025-09-02T07:47:14.769Z",
               "EditorCaption": ""
             }
           ]

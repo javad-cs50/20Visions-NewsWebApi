@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using NewsWebSiteApi.Application.Interfaces;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
@@ -71,5 +72,25 @@ public class CommentRepository: ICommentRepository
             return false;
 
 
+    }
+    //this will delete all of the Comments of an article
+    public async Task<bool> DeleteAllCommentOfAnArticle(int articleId)
+    {
+        var comments = await _context.Comments
+            .Where(c => c.ArticleId == articleId)
+            .ToListAsync();
+        if (comments == null || !comments.Any())
+            return false;
+
+        foreach (var comment in comments)
+        {
+            comment.AppAction = AppAction.Deleted;
+            comment.ModifiedDate = DateTime.Now;
+        }
+        var result = await _context.SaveChangesAsync();
+        if (result > 0)
+            return true;
+        else
+            return false;
     }
 }

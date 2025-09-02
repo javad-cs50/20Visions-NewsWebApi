@@ -341,32 +341,6 @@
   },
   {
     "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
-    "Method": "GetAllCommentsByArticleId",
-    "RelativePath": "api/Comments/{articleId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "articleId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Comment.ShowCommentDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
     "Method": "GetCommentById",
     "RelativePath": "api/Comments/{id}",
     "HttpMethod": "GET",
@@ -439,6 +413,37 @@
     "ReturnTypes": [
       {
         "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NewsWebSiteApi.Controllers.CommentsController",
+    "Method": "GetAllCommentsByArticleId",
+    "RelativePath": "api/Comments/article/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "articleId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[NewsWebSiteApi.Application.Models.Comment.ShowCommentDto, NewsWebSiteApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

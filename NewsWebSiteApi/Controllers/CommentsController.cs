@@ -23,11 +23,11 @@ namespace NewsWebSiteApi.Controllers
         }
 
         
-        [HttpGet("{articleId}")]
-        public async Task<ActionResult<IEnumerable<ShowCommentDto>>> GetAllCommentsByArticleId(int articleId)
+        [HttpGet("article/{id}")]
+        public async Task<ActionResult<IEnumerable<ShowCommentDto>>> GetAllCommentsByArticleId(int id)
         {
-            var comments = await _commentRepository.GetAll(articleId);
-            if (comments == null) return NotFound();
+            var comments = await _commentRepository.GetAll(id);
+            if (comments == null || !comments.Any()) return NotFound();
             var commentDtos = comments.Select(c => new ShowCommentDto
             {
                 Id = c.Id,
