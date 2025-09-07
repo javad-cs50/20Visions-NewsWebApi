@@ -10,7 +10,7 @@ public class ShowArticleDto
 
     public string Title { get; set; }
     public string Cover { get; set; }
-    public string Discription { get; set; }
+    public string Description { get; set; }
     public DateTime CreatedDate { get; set; }
     public int AuthorId { get; set; }
     public int CategoryId { get; set; }

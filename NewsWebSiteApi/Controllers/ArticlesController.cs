@@ -20,159 +20,91 @@ namespace NewsWebSiteApi.Controllers
         private readonly IArticleRepository _articleRepository;
         private readonly ILogger<ArticlesController> _logger;
         private readonly IConfiguration _configuration;
-        public ArticlesController(IArticleRepository articleRepository,ILogger<ArticlesController> logger ,IConfiguration configuration)
+        public ArticlesController(IArticleRepository articleRepository, ILogger<ArticlesController> logger, IConfiguration configuration)
         {
-            _articleRepository = articleRepository; 
+            _articleRepository = articleRepository;
             _logger = logger;
             _configuration = configuration;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ShowArticleDto>> GetById(int id)
+        {
+            var article = await _articleRepository.GetById(id);
+            if (article == null) return NotFound();
+
+            var articleDto = new ShowArticleDto
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Cover = article.Cover,
+                Description = article.Discription,
+                AuthorId = article.AuthorId,
+                CategoryId = article.CategoryId,
+                CreatedDate = article.CreatedDate,
+                IsFeatured = article.IsFeatured,
+                CommentsDto = article.Comments
+                .Select(c => new ShowCommentDto
+                {
+                    Id = c.Id,
+                    CreatedDate = c.CreatedDate,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Message = c.Message
+                }).ToList(),
+                CategoryDto=new ShowCategoryDto
+                { 
+                    Id=article.Category.Id,
+                    Symbol=article.Category.Symbol,
+                    Title=article.Category.Title
+                }
+
+            };
+            return Ok(articleDto);
+                
+
+
+        
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShowArticleDto>?>> GetAllArticles()
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>?>> GetAll()
         {
             var articles = await _articleRepository.GetAll();
             if (articles==null || !articles.Any())
                 return NotFound();
             
-            var articleDtos = articles.Select( a => new ShowArticleDto 
+            var articleDtos = articles.Select( a => new ShowArticleSummaryDto 
             {
                 Id = a.Id,
                 Cover = a.Cover,
-                Discription = a.Discription,
+                SummaryDescription = a.Discription,
                 Title = a.Title,
-                AuthorId = a.AuthorId,
-                CategoryId = a.CategoryId,
                 CreatedDate = a.CreatedDate,
-                IsFeatured = a.IsFeatured,
-                CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
-                { 
-                    Id=c.Id,
-                    FirstName=c.FirstName,
-                    LastName=c.LastName,
-                    Message = c.Message,
-
-                    CreatedDate = c.CreatedDate
-                }).ToList()),
-                CategoryDto = new ShowCategoryDto
-                { 
-                    Id=a.Category.Id,
-                    Symbol=a.Category.Symbol,
-                    Title=a.Category.Title
-                },
-                UserDto =new ShowUserDto
-                {
-                    FirstName =a.User.FirstName,
-                    LastName =a.User.LastName,
-                    Id=a.User.Id,
-                }
-
+                IsFeatured = a.IsFeatured
             });
+
             return Ok(articleDtos);
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetBySearch([FromQuery] string keyWord, [FromQuery] string title, [FromQuery]string description ) {
-            
-            var articles=new List<Article>();
-            if(keyWord is not null)
-            {
-                articles.AddRange(await _articleRepository.GetByKeyWord(keyWord));
-                
-            }
-            if (title is not null)
-            {
-                articles.AddRange(await _articleRepository.GetByTitle(title));
-
-            }
-            if (description is not null)
-            {
-                articles.AddRange(await _articleRepository.GetByDescription(description));
-
-            }
-
-            if (articles == null || !articles.Any())
-                return NotFound();
-            else
-            {
-                var articleDtos = articles.Distinct().Select(a => new ShowArticleDto
-                {
-                    Id = a.Id,
-                    Cover = a.Cover,
-                    Discription = a.Discription,
-                    Title = a.Title,
-                    AuthorId = a.AuthorId,
-                    CategoryId = a.CategoryId,
-                    CreatedDate = a.CreatedDate,
-                    IsFeatured = a.IsFeatured,
-                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
-                    {
-                        Id = c.Id,
-                        FirstName = c.FirstName,
-                        LastName = c.LastName,
-                        Message = c.Message,
-
-                        CreatedDate = c.CreatedDate
-                    }).ToList()),
-                    CategoryDto = new ShowCategoryDto
-                    {
-                        Id = a.Category.Id,
-                        Symbol = a.Category.Symbol,
-                        Title = a.Category.Title
-                    },
-                    UserDto = new ShowUserDto
-                    {
-                        FirstName = a.User.FirstName,
-                        LastName = a.User.LastName,
-                        Id = a.User.Id,
-                    }
-
-                });
-                
-
-                return Ok(articleDtos);
-            }
-        }
-
-        [HttpGet("globalSearch")]
-        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetByGlobalSearch(string globalSearch)
+        public async Task<ActionResult<IEnumerable<ShowArticleDto>>> GetBySearch([FromQuery]string text)
         {
-            var articles = await _articleRepository.GlobalSearch(globalSearch);
+            var articles = await _articleRepository.GlobalSearch(text);
             if(articles==null || !articles.Any())
                 return NotFound();
             else
             {
-                var articleDtos = articles.Distinct().Select(a => new ShowArticleDto
+                var articleDtos = articles.Distinct().Select(a => new ShowArticleSummaryDto
                 {
                     Id = a.Id,
                     Cover = a.Cover,
-                    Discription = a.Discription,
+                    SummaryDescription = a.Discription,
                     Title = a.Title,
-                    AuthorId = a.AuthorId,
-                    CategoryId = a.CategoryId,
+                    
                     CreatedDate = a.CreatedDate,
-                    IsFeatured = a.IsFeatured,
-                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
-                    {
-                        Id = c.Id,
-                        FirstName = c.FirstName,
-                        LastName = c.LastName,
-                        Message = c.Message,
-
-                        CreatedDate = c.CreatedDate
-                    }).ToList()),
-                    CategoryDto = new ShowCategoryDto
-                    {
-                        Id = a.Category.Id,
-                        Symbol = a.Category.Symbol,
-                        Title = a.Category.Title
-                    },
-                    UserDto = new ShowUserDto
-                    {
-                        FirstName = a.User.FirstName,
-                        LastName = a.User.LastName,
-                        Id = a.User.Id,
-                    }
+                    CreatedBy=a.CreatedBy,
+                    IsFeatured = a.IsFeatured
                 });
 
                 return Ok(articleDtos);
@@ -187,37 +119,15 @@ namespace NewsWebSiteApi.Controllers
                 return NotFound();
             else
             {
-                var featuredArticleDto = featuredArticle.Select(a => new ShowArticleDto
+                var featuredArticleDto = featuredArticle.Select(a => new ShowArticleSummaryDto
                 {
                     Id = a.Id,
-                    Cover = a.Cover,
-                    Discription = a.Discription,
                     Title = a.Title,
-                    AuthorId = a.AuthorId,
-                    CategoryId = a.CategoryId,
+                    Cover = a.Cover,
+                    SummaryDescription = a.Discription,
                     CreatedDate = a.CreatedDate,
-                    IsFeatured = a.IsFeatured,
-                    CommentsDto = (IList<ShowCommentDto>)(a.Comments?.Select(c => new ShowCommentDto
-                    {
-                        Id = c.Id,
-                        FirstName = c.FirstName,
-                        LastName = c.LastName,
-                        Message = c.Message,
-
-                        CreatedDate = c.CreatedDate
-                    }).ToList()),
-                    CategoryDto = new ShowCategoryDto
-                    {
-                        Id = a.Category.Id,
-                        Symbol = a.Category.Symbol,
-                        Title = a.Category.Title
-                    },
-                    UserDto = new ShowUserDto
-                    {
-                        FirstName = a.User.FirstName,
-                        LastName = a.User.LastName,
-                        Id = a.User.Id,
-                    }
+                    CreatedBy = a.CreatedBy,
+                    IsFeatured = a.IsFeatured
                 });
                 
             }
@@ -226,13 +136,13 @@ namespace NewsWebSiteApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> CreateArticle([FromBody] CreateArticleDto req )
+        public async Task<ActionResult<bool>> Create([FromBody] CreateArticleDto req )
         {
             var article = new Article
             {
                 Title = req.Title,
                 Cover = req.Cover,
-                Discription = req.Discription,
+                Discription = req.Description,
                 CategoryId = req.CategoryId,
                 AuthorId = req.AuthorId,
                 CreatedDate = DateTime.Now,
@@ -248,7 +158,7 @@ namespace NewsWebSiteApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> UpdateArticle(int id, [FromBody] CreateArticleDto articleDto )
+        public async Task<ActionResult<bool>> Update(int id, [FromBody] CreateArticleDto articleDto )
         {
             var article =await _articleRepository.GetById(id);
             if (article is not null)
@@ -259,7 +169,7 @@ namespace NewsWebSiteApi.Controllers
                 article.ModifiedDate = DateTime.Now;
                 article.IsFeatured = articleDto.IsFeatured;
                 article.Title = articleDto.Title;
-                article.Discription = articleDto.Discription;
+                article.Discription = articleDto.Description;
                 article.Cover = articleDto.Cover;
                 article.CategoryId = articleDto.CategoryId;
                 article.KeyWord = articleDto.KeyWord;
@@ -275,7 +185,7 @@ namespace NewsWebSiteApi.Controllers
 
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteArticle([FromRoute]int id) 
+        public async Task<ActionResult<bool>> Delete([FromRoute]int id) 
         {
             var article =await _articleRepository.GetById(id);
             if (article == null) return NotFound();
