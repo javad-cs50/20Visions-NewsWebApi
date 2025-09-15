@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsWebSiteApi.Domain.Entities.Article;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NewsWebSiteApi.Domain.Entities.User;
 
 
 namespace NewsWebSiteApi.Infrastructure.Configuration.ArticleConfiguration;

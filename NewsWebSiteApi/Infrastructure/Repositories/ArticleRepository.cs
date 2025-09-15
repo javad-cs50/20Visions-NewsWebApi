@@ -117,7 +117,7 @@ public class ArticleRepository : IArticleRepository
 
         if (article != null)
         {
-            article.AppAction=AppAction.Deleted;
+            article.AppAction = AppAction.Deleted;
             var changes = await _context.SaveChangesAsync();
             if (changes > 0)
                 return true;

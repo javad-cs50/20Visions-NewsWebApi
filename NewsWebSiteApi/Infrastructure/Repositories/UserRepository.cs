@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewsWebSiteApi.Application.Interfaces;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Domain.Entities.User;
 using NewsWebSiteApi.Domain.Enum;
