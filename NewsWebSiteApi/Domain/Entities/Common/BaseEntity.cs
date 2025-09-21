@@ -9,5 +9,5 @@ public class BaseEntity
     public DateTime CreatedDate { get; set; }
     public String? ModifyBy { get; set; }
     public DateTime ModifiedDate { get; set; }
-    public AppAction AppAction { get; set; } = AppAction.Active;
+    public AppAction AppAction { get; set; } = AppAction.Pending;
 }

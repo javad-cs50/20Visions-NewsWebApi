@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
+using NewsWebSiteApi.Application.Mapper;
 using NewsWebSiteApi.Application.Models.Article;
 using NewsWebSiteApi.Application.Models.Category;
 using NewsWebSiteApi.Application.Models.Comment;
-using NewsWebSiteApi.Application.Models.User;
 using NewsWebSiteApi.Domain.Entities.Article;
-using NewsWebSiteApi.Domain.Entities.Comment;
 
 namespace NewsWebSiteApi.Controllers
 {
@@ -61,9 +56,6 @@ namespace NewsWebSiteApi.Controllers
 
             };
             return Ok(articleDto);
-                
-
-
         
         }
 
@@ -74,15 +66,7 @@ namespace NewsWebSiteApi.Controllers
             if (articles==null || !articles.Any())
                 return NotFound();
             
-            var articleDtos = articles.Select( a => new ShowArticleSummaryDto 
-            {
-                Id = a.Id,
-                Cover = a.Cover,
-                SummaryDescription = a.Discription,
-                Title = a.Title,
-                CreatedDate = a.CreatedDate,
-                IsFeatured = a.IsFeatured
-            });
+            var articleDtos = articles.Select( a => a.ToShowArticleSummaryDto());
 
             return Ok(articleDtos);
         }
@@ -95,17 +79,7 @@ namespace NewsWebSiteApi.Controllers
                 return NotFound();
             else
             {
-                var articleDtos = articles.Distinct().Select(a => new ShowArticleSummaryDto
-                {
-                    Id = a.Id,
-                    Cover = a.Cover,
-                    SummaryDescription = a.Discription,
-                    Title = a.Title,
-                    
-                    CreatedDate = a.CreatedDate,
-                    CreatedBy=a.CreatedBy,
-                    IsFeatured = a.IsFeatured
-                });
+                var articleDtos = articles.Distinct().Select(a=>a.ToShowArticleSummaryDto());
 
                 return Ok(articleDtos);
             }
@@ -119,16 +93,7 @@ namespace NewsWebSiteApi.Controllers
                 return NotFound();
             else
             {
-                var featuredArticleDto = featuredArticle.Select(a => new ShowArticleSummaryDto
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Cover = a.Cover,
-                    SummaryDescription = a.Discription,
-                    CreatedDate = a.CreatedDate,
-                    CreatedBy = a.CreatedBy,
-                    IsFeatured = a.IsFeatured
-                });
+                var featuredArticleDto = featuredArticle.Select(a=>a.ToShowArticleSummaryDto());
                 
             }
                 return Ok(featuredArticle);
@@ -138,16 +103,7 @@ namespace NewsWebSiteApi.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> Create([FromBody] CreateArticleDto req )
         {
-            var article = new Article
-            {
-                Title = req.Title,
-                Cover = req.Cover,
-                Discription = req.Description,
-                CategoryId = req.CategoryId,
-                AuthorId = req.AuthorId,
-                CreatedDate = DateTime.Now,
-                KeyWord=req.KeyWord
-            };
+            var article = req.ToArticleEntity();
             var result =await _articleRepository.Create(article);
             if (result==false)
                 return BadRequest(result);

@@ -1,4 +1,6 @@
-﻿using NewsWebSiteApi.Domain.Entities.Article;
+﻿
+
+using NewsWebSiteApi.Domain.Entities.Article;
 
 namespace NewsWebSiteApi.Application.Interfaces.Repositories;
 

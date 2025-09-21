@@ -5,7 +5,6 @@ using NewsWebSiteApi.Domain.Enum;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
 
 namespace NewsWebSiteApi.Infrastructure.Repositories;
-
 public class ArticleRepository : IArticleRepository
 {
     
