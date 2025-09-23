@@ -1,11 +1,12 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using NewsWebSiteApi.Application.Interfaces.Jwt;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace NewsWebSiteApi.Application.Services;
 
-public class JwtOperation
+public class JwtOperation:IJwtOperation
 {
     private readonly IConfiguration _configuration;
     public JwtOperation(IConfiguration configuration)
@@ -13,9 +14,9 @@ public class JwtOperation
         _configuration = configuration;
     }
     
-    public string GenerateTokenAsync(string userName ,int password ,string userRole)
+    public string GenerateTokenAsync(string userName ,int userId ,string userRole)
     {
-        var claims = GetClaims(userName,password,userRole);
+        var claims = GetClaims(userName,userId,userRole);
         var signingCredintial = GetSigningCredentials();
         var tokenOptions = GenerateTokenOption(signingCredintial, claims);
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);

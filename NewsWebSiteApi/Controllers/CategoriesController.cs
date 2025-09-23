@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.Category;
@@ -7,6 +8,7 @@ using NewsWebSiteApi.Domain.Enum;
 
 namespace NewsWebSiteApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class CategoriesController : ControllerBase

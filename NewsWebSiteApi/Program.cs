@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using NewsWebSiteApi.Application.Interfaces;
 using NewsWebSiteApi.Application.Interfaces.Jwt;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
+using NewsWebSiteApi.Application.Services;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
 using NewsWebSiteApi.Infrastructure.Repositories;
 using System.Text;
@@ -73,6 +74,7 @@ builder.WithOrigins("https://news.20visions.ir").AllowAnyHeader().AllowAnyMethod
 //builder.Services.AddScoped<IJwtOperation,IJwtOperation>();
 
 //add Jwt Bearer Authentication
+builder.Services.AddScoped<IJwtOperation, JwtOperation>();
 builder.Services.AddAuthentication("Bearer").AddJwtBearer(option =>
     option.TokenValidationParameters =
         new()

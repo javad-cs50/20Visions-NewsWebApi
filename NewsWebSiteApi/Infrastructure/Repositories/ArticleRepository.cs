@@ -21,6 +21,7 @@ public class ArticleRepository : IArticleRepository
             .FirstOrDefaultAsync(a=>a.Id==id);
         return article;
     }
+    
     public async Task<IEnumerable<Article?>> GetByKeyWord(string keyWords)
     {
         var keyWordList = SplitStringToList(keyWords);

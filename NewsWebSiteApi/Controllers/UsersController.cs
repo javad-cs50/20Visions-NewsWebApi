@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NewsWebSiteApi.Application.Helper;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
 using NewsWebSiteApi.Application.Models.User;
 using NewsWebSiteApi.Domain.Entities.User;
 
 namespace NewsWebSiteApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
@@ -23,7 +26,7 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowUserDto>>> GetAllUsers()
     {
-        var users =await _userRepository.GetAll();
+        var users =await _userRepository.GetAllAsync();
         if(users == null)
             return NotFound();
 
@@ -39,7 +42,7 @@ public class UsersController : ControllerBase
     [HttpGet("{userId}")]
     public async Task<ActionResult<ShowUserDto>> GetUserById(int userId)
     {
-        var user = await _userRepository.GetById(userId);
+        var user = await _userRepository.GetByIdAsync(userId);
         if (user == null)
             return NotFound();
         var userDto = new ShowUserDto 
@@ -51,17 +54,21 @@ public class UsersController : ControllerBase
         };
         return Ok(userDto);
     }
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult<bool>> CreateUser([FromBody]CreateUserDto req) 
     {
-        var user = new User 
+        var user = new User
         {
             FirstName = req.FirstName,
             LastName = req.LastName,
-            PhoneNumber =req.PhoneNumber,
-            CreatedDate=DateTime.Now
+            PhoneNumber = req.PhoneNumber,
+            CreatedDate = DateTime.Now,
+            Role = "User",
+            PasswordHash = PasswordService.HashPassword((req.PlainPassword))
+
         };
-        var isCreated = await _userRepository.Create(user);
+        var isCreated = await _userRepository.CreateAsync(user);
 
         if (isCreated == false) 
             return BadRequest(isCreated);
@@ -71,7 +78,7 @@ public class UsersController : ControllerBase
     [HttpPut("{userId}")]
     public async Task<ActionResult<bool>> UpdateUser(int userId, [FromBody] CreateUserDto req) 
     {
-        var user =await _userRepository.GetById(userId);
+        var user =await _userRepository.GetByIdAsync(userId);
         if(user == null) 
             return NotFound();
         else
@@ -82,7 +89,7 @@ public class UsersController : ControllerBase
             user.ModifiedDate = DateTime.Now;
         }
 
-        var isUpdated = await _userRepository.Update(user);
+        var isUpdated = await _userRepository.UpdateAsync(user);
         if (isUpdated == false)
             return BadRequest(isUpdated);
         else
@@ -92,11 +99,11 @@ public class UsersController : ControllerBase
     [HttpDelete("{userId}")]
     public async Task<ActionResult<bool>> DeleteUser(int userId)    
     {
-        var user = await _userRepository.GetById(userId);
+        var user = await _userRepository.GetByIdAsync(userId);
         if (user == null)
             return NotFound();
         
-        var isDeleted =await _userRepository.Delete(userId);
+        var isDeleted =await _userRepository.DeleteAsync(userId);
         if (isDeleted == null)
             return BadRequest(isDeleted);
         else

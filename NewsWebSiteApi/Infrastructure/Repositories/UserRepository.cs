@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsWebSiteApi.Application.Interfaces.Repositories;
+using NewsWebSiteApi.Domain.Entities.Article;
 using NewsWebSiteApi.Domain.Entities.User;
 using NewsWebSiteApi.Domain.Enum;
 using NewsWebSiteApi.Infrastructure.ApplicationDb;
@@ -14,19 +15,24 @@ public class UserRepository: IUserRepository
     {
         _context = context;
     }
-    public async Task<User?> GetById(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         var user = await _context.Users.FindAsync(id);
         return user;
     }
+    public async Task<User?> GetByPhoneNumberAsync(string phoneNumber)
+    {
+        var user =await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+        return user; 
+    }
 
-    public async Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
         var users = await _context.Users.AsNoTracking().ToListAsync();
         return users;
     }
 
-    public async Task<bool> Create(User user)
+    public async Task<bool> CreateAsync(User user)
     {
         await _context.Users.AddAsync(user);
         var changes = await _context.SaveChangesAsync();
@@ -36,7 +42,7 @@ public class UserRepository: IUserRepository
             return false;
     }
 
-    public async Task<bool> Update(User user)
+    public async Task<bool> UpdateAsync(User user)
     {
         _context.Users.Update(user);
         var changes = await _context.SaveChangesAsync();
@@ -46,7 +52,7 @@ public class UserRepository: IUserRepository
             return false;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         var user = await _context.Users.FindAsync(id);
         if (user is not null) { 
